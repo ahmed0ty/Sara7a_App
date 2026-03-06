@@ -12,7 +12,8 @@ import rateLimit from 'express-rate-limit'
 
 
 const bootstrap = async (app,express)=>{
-app.use(cors(corsOptions()))
+// app.use(cors(corsOptions()))
+app.use(cors())
   app.use(express.json())
 
 
