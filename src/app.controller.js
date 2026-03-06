@@ -12,7 +12,7 @@ import rateLimit from 'express-rate-limit'
 
 
 const bootstrap = async (app,express)=>{
-
+app.use(cors(corsOptions()))
   app.use(express.json())
 
 
@@ -31,10 +31,10 @@ app.use(limiter)
 app.use(helmet())
 
 attachRoutingWithLogger(app,"/api/auth",authRouter,"auth.log")
-attachRoutingWithLogger(app,"/api/user",authRouter,"users.log")
+attachRoutingWithLogger(app,"/api/user",userRouter,"users.log")
 
 
-app.use(cors(corsOptions()))
+
 
   await connectDB()
 
