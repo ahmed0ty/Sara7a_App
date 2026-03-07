@@ -1,5 +1,6 @@
+import { Resend } from "resend";
 
-import nodemailer from "nodemailer";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail({
   to = "",
@@ -10,33 +11,24 @@ export async function sendEmail({
   bcc = "",
   attachments = [],
 }) {
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.APP_PASSWORD,
-  },
-});
 
-  const info = await transporter.sendMail({
-    from: `Route Academy 👻 <${process.env.EMAIL}>`,
-    to,
-    subject,
-    text,
-    html,
-    cc,
-    bcc,
-    attachments,
+  const { data, error } = await resend.emails.send({
+    from: "Sara7a 👻 <onboarding@resend.dev>",
+    to: to,
+    subject: subject,
+    html: html,
   });
 
-  console.log("message sent:",info.messageId)
+  if (error) {
+    console.log("Email Error:", error);
+    return;
+  }
+
+  console.log("message sent:", data);
 }
 
 export const emailSubject = {
-
-    confirmEmail:"confirm your email",
-    resetPassword:"reset your password",
-    welcome:"welcome to route academy"
-}
+  confirmEmail: "confirm your email",
+  resetPassword: "reset your password",
+  welcome: "welcome to route academy",
+};
