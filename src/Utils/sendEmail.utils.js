@@ -2,46 +2,41 @@ import nodemailer from "nodemailer";
 
 export async function sendEmail({
   to = "",
-  subject = "Sa7aha Application",
+  subject = "",
   text = "",
   html = "",
-  cc = "",
-  bcc = "",
-  attachments = [],
 }) {
 
+  console.log("STEP 1: sendEmail called");
   console.log("EMAIL:", process.env.EMAIL);
-  console.log("PASS:", process.env.APP_PASSWORD);
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.APP_PASSWORD,
-  },
-});
-
-try {
-  const info = await transporter.sendMail({
-    from: `Sara7a 👻 <${process.env.EMAIL}>`,
-    to,
-    subject,
-    text,
-    html,
-    cc,
-    bcc,
-    attachments,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.APP_PASSWORD,
+    },
   });
 
-  console.log("message sent:", info.messageId);
+  console.log("STEP 2: transporter created");
 
-} catch (error) {
-  console.log("EMAIL ERROR:", error);
-}e.log("message sent:", info.messageId);
+  try {
+
+    console.log("STEP 3: before sendMail");
+
+    const info = await transporter.sendMail({
+      from: `Sara7a 👻 <${process.env.EMAIL}>`,
+      to,
+      subject,
+      text,
+      html,
+    });
+
+    console.log("STEP 4: message sent", info.messageId);
+
+  } catch (error) {
+
+    console.log("STEP ERROR:", error);
+
+  }
 }
-
-export const emailSubject = {
-  confirmEmail: "confirm your email",
-  resetPassword: "reset your password",
-  welcome: "welcome to route academy",
-};
