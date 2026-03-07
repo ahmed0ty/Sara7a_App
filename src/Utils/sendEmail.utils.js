@@ -40,3 +40,9 @@ export async function sendEmail({
 
   }
 }
+
+export const emailSubject = {
+  confirmEmail: "confirm your email",
+  resetPassword: "reset your password",
+  welcome: "welcome to route academy",
+};
