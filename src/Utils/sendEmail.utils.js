@@ -23,6 +23,7 @@ export async function sendEmail({
     },
   });
 
+try {
   const info = await transporter.sendMail({
     from: `Sara7a 👻 <${process.env.EMAIL}>`,
     to,
@@ -35,6 +36,10 @@ export async function sendEmail({
   });
 
   console.log("message sent:", info.messageId);
+
+} catch (error) {
+  console.log("EMAIL ERROR:", error);
+}e.log("message sent:", info.messageId);
 }
 
 export const emailSubject = {
