@@ -13,15 +13,13 @@ export async function sendEmail({
   console.log("EMAIL:", process.env.EMAIL);
   console.log("PASS:", process.env.APP_PASSWORD);
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.APP_PASSWORD,
-    },
-  });
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.APP_PASSWORD,
+  },
+});
 
 try {
   const info = await transporter.sendMail({
