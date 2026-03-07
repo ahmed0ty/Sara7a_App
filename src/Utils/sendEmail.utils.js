@@ -10,6 +10,10 @@ export async function sendEmail({
   attachments = [],
 }) {
 
+ 
+  console.log("EMAIL:", process.env.EMAIL);
+  console.log("PASS:", process.env.APP_PASSWORD);
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -33,9 +37,3 @@ export async function sendEmail({
 
   console.log("message sent:", info.messageId);
 }
-
-export const emailSubject = {
-  confirmEmail: "confirm your email",
-  resetPassword: "reset your password",
-  welcome: "welcome to route academy",
-};
