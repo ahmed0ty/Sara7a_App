@@ -1,6 +1,7 @@
+import dotenv from "dotenv"
 import express from "express";
 import bootstrap from "./app.controller.js";
-import dotenv from "dotenv"
+
 import "./Utils/event.utils.js"
 
 import dns from "dns"
