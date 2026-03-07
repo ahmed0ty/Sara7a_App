@@ -40,3 +40,12 @@ export const getMessageValidation = {
     .required(),
 
 };
+
+
+export const deleteMessageValidation = {
+  params: joi
+    .object({
+      messageId: generalFields.id.required(),
+    })
+    .required(),
+};

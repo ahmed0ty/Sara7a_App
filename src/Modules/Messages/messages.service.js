@@ -78,3 +78,41 @@ return successResponse({
   data: { messages },
 });
 };
+
+
+
+
+
+
+
+export const deleteMessage = async (req, res, next) => {
+  const { messageId } = req.params;
+
+  const message = await dbService.findById({
+    model: MessageModel,
+    id: messageId,
+  });
+
+  if (!message) {
+    return next(new Error("Message Not Found", { cause: 404 }));
+  }
+
+
+  if (
+    message.receiverId.toString() !== req.user._id.toString() &&
+    message.senderId?.toString() !== req.user._id.toString()
+  ) {
+    return next(new Error("Unauthorized", { cause: 403 }));
+  }
+
+  await dbService.deleteOne({
+    model: MessageModel,
+    filter: { _id: messageId },
+  });
+
+  return successResponse({
+    res,
+    statusCode: 200,
+    message: "Message Deleted Successfully",
+  });
+};
