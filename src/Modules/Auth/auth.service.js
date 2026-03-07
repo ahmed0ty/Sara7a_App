@@ -27,12 +27,6 @@ export const signUp = asyncHandler(async (req, res, next) => {
 
 
 
-
-
-
-
-
-
   if (await findOne({ model: UserModel, filter: { email } }))
     return next(new Error("user already exist", { cause: 409 }));
 
@@ -276,7 +270,7 @@ if (!user)
 
 emailEvent.emit("forgetpassword", {
   to: email,
-  firstname: user.firstName,
+  firstName: user.firstName,
   otp,
 });
 
