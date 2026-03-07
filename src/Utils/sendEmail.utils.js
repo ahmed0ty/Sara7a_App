@@ -10,7 +10,6 @@ export async function sendEmail({
   attachments = [],
 }) {
 
- 
   console.log("EMAIL:", process.env.EMAIL);
   console.log("PASS:", process.env.APP_PASSWORD);
 
@@ -37,3 +36,9 @@ export async function sendEmail({
 
   console.log("message sent:", info.messageId);
 }
+
+export const emailSubject = {
+  confirmEmail: "confirm your email",
+  resetPassword: "reset your password",
+  welcome: "welcome to route academy",
+};
