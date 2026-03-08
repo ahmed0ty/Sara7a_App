@@ -103,8 +103,13 @@ export const authentication = ({ tokenType = tokenTypesEnum.access }) => {
 
     if (!data) return;
 
-    req.user = data.user;     
-    req.decoded = data.decoded;
+   req.user = data.user;
+req.decoded = data.decoded;
+
+await UserModel.updateOne(
+  { _id: data.user._id },
+  { lastSeen: new Date() }
+);
 
     return next();
   };

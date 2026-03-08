@@ -80,6 +80,9 @@ router.patch('/cover-image',
 );
 
 
+router.get("/public/:userId", userService.getUserPublicProfile)
+
+
 
 
 

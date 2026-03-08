@@ -287,3 +287,24 @@ const user = await dbService.findOneAndUpdate({
     data: { user },
   });
 };
+
+
+
+
+export const getUserPublicProfile = async (req,res,next)=>{
+
+const { userId } = req.params
+
+const user = await UserModel.findById(userId)
+.select("firstName lastName lastSeen")
+.lean()
+
+if(!user){
+return next(new Error("User not found",{cause:404}))
+}
+
+return res.json({
+user
+})
+
+}

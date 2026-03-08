@@ -88,6 +88,10 @@ const userSchema = new Schema(
     changeCredentialsTime:Date,
 
 
+    lastSeen:{
+    type:Date,
+    default:Date.now
+  },
 
 
 
